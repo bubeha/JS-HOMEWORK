@@ -112,14 +112,14 @@ console.log(isEqual(arrayOne, arrayTwo));
 // Написать функцию intersection, которая принимает в качестве параметров два массива, 
 // и возвращает новый, который содержит элементы, встречающиеся в обоих массивах.
 
-var arrayOne = [1, 2, 4, 7, 6];
-var arrayTwo = [1, 3, 4, 5, 6];
+var arrayOne = [1, 5, 8, 'v', 'd', 'a'];
+var arrayTwo = [1, 2, 3, 5, 8, 'b', 'a'];
 
 function intersection(arr1, arr2) {
     newArray = [];
     for (var i = 0; i < arr1.length; i++) {
         for (var j = 0; j < arr2.length; j++) {
-            if (arr1[i] == arr2[i]) {
+            if (arr1[i] === arr2[j]) {
                 newArray.push(arr1[i]);
                 break;
             }
@@ -129,6 +129,13 @@ function intersection(arr1, arr2) {
 }
 
 console.log(intersection(arrayOne, arrayTwo));
+
+
+
+
+
+
+
 
 
 
