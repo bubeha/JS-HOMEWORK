@@ -33,12 +33,12 @@ function exerciseOne(arrayOfPeople) {
  * Весь HTML должен идти в <div> с id="content"
  *
  */
-function exerciseTwo(shoppingList) {
+function exerciseTwo(shopping) {
+  const shoppingList = document.createElement('ul');
   const content = document.querySelector("#content");
+  content.appendChild(shoppingList);
   shopping.forEach(item => {
-    const shoppingList = document.createElement('ul'),
-      shoppingListItem = document.createElement('li');
-    content.appendChild(shoppingList);
+    shoppingListItem = document.createElement('li');
     shoppingListItem.textContent = item;
     shoppingList.appendChild(shoppingListItem);
     document.body.appendChild(content)
@@ -70,10 +70,60 @@ function exerciseTwo(shoppingList) {
     - Добавьте <img> для каждой книги с ее обложкой.
     - Измените стиль книги в зависимости от того прочитана она (зеленый) или нет (красный).
 **/
-function exerciseThree(books) {
-  //Свой код здесь
-}
 
+function exerciseThree(books) {
+  // создали список для всех книг
+  const booksList = document.createElement('ul');
+  // нашли див по айди где будет храниться список книг
+  const content = document.querySelector("#content");
+  // Добавили список книг в див
+  content.appendChild(booksList);
+  // Через функцию forEach проходимся по всем объектам
+  books.forEach(item => {
+    // Создаем блок li для каждой книги
+    const booksListItem = document.createElement('li');
+    // Добавляем блок li в блок ul
+    booksList.appendChild(booksListItem);
+    // Создаем блок p в котором будем хранить название книги и имя автора
+    const booksInf = document.createElement('p');
+    // Добавляем блок p в li
+    booksListItem.appendChild(booksInf);
+    // Создаем для блока p блок h1 где будем хранить название книги
+    const booksTitle = document.createElement('h1');
+    // Добавляем в блок p title h1 с названием книги 
+    booksInf.appendChild(booksTitle);
+    // Указываем что h1 = title в объекте(тоесть в h1 будет отображаться имя обьекта(книги))
+    booksTitle.textContent = item.title;
+    // Создаем для блока p блок h3 где будем хранить имя автора книги
+    const booksAuthor = document.createElement('h3');
+    // Добавляем в блок p author h3 с именами авторов
+    booksInf.appendChild(booksAuthor);
+    // Указываем что h1 = title в объекте(тоесть в h1 будет отображаться имя обьекта(книги))
+    booksAuthor.textContent = item.author;
+    // создаем блок с изображениями 
+    const bookImg = document.createElement('img');
+    // указываем путь к изображению по автору книги 
+    bookImg.src = `img/${item.author}.jpg`;
+    bookImg.style.width = "440px";
+    bookImg.style.height = "460px";
+    // Добавляем изображения в блок li
+    booksListItem.appendChild(bookImg);
+    // создаем проверку. если книга прочитанна(alreadyRead: true) то цвет фона Зеленый
+    if (item.alreadyRead) {
+      booksListItem.style.backgroundColor = 'green';
+      // если не прочитана (alreadyRead: false) то цвет фона Красный
+    } else {
+      booksListItem.style.backgroundColor = 'red';
+    }
+    booksList.style.display = 'flex';
+    booksList.style.justifyContent = 'space-between';
+    booksListItem.style.listStyleType = 'none'
+    booksListItem.style.padding = '20px'
+    booksInf.style.display = 'flex';
+    booksInf.style.flexDirection = 'column';
+    booksInf.style.alignItems = 'center';
+  })
+}
 //
 //
 //
