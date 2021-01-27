@@ -6,8 +6,7 @@
 // haveNumber()
 function haveNumber(string) {
     const regex = /\d/;
-    const result = regex.test(string);
-    return result
+    return result = regex.test(string);
 }
 console.log(haveNumber('Прив2т'));
 console.log(haveNumber('Привет'));
@@ -20,8 +19,7 @@ console.log(haveNumber('Привет'));
 // findTime('Breakfast at 09:00 in the room 123:456')
 function findTime(string) {
     const rexeg = /\b[0-2]?\d:[0-5]\d\b/mg;
-    const result = string.match(rexeg);
-    return result;
+    return result = string.match(rexeg);
 }
 console.log(findTime('Breakfast at 09:00 in the room 123:456'));
 
@@ -34,8 +32,7 @@ arr = ['City', 'Apps', 'Call', 'Grodno']
 // ArrayFilter(arr);
 function ArrayFilter(arr) {
     const rexeg = /^C/;
-    const result = arr.filter(arrayItem => !rexeg.test(arrayItem));
-    return result;
+    return result = arr.filter(arrayItem => !rexeg.test(arrayItem));
 }
 console.log(ArrayFilter(arr));
 
@@ -49,8 +46,7 @@ console.log(ArrayFilter(arr));
 // includeAC();
 function includeAC(string) {
     const rexeg = /a.*c/;
-    const result = rexeg.test(string);
-    return result;
+    return result = rexeg.test(string);
 }
 console.log(includeAC('abcd'));
 console.log(includeAC('abd'));
