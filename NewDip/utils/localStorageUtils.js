@@ -1,15 +1,16 @@
 //Создаем класс LocalStorageUtils
 class LocalStorageUtils {
-    // У элементов есть ключ которы будет использоваться нескошлько раз, поэтому при помощи constructor выносим его в свойство 
+    // У элементов есть ключ которы будет использоваться нескошлько раз, поэтому при помощи constructor выносим его в свойство
     constructor() {
         this.keyName = 'products';
     }
-    // Записываем 2 метода позволяющие получить все продукты которые находяться в локальном хранилище 
+    // Записываем 2 метода позволяющие получить все продукты которые находяться в локальном хранилище
     getProducts() {
         // Для получения из локального хранилища вызываем метод localStorage.getItem
         // Если есть какое то значение в localStorage то вернеться строка, иначе null для этого делаем проверку
         const productsLocalStorage = localStorage.getItem(this.keyName);
-        // Если не null то переводим строку в массив 
+        // Если не null то переводим строку в массив
+
         if (productsLocalStorage !== null) {
             return JSON.parse(productsLocalStorage);
         }

@@ -1,40 +1,50 @@
 const deleted = document.querySelector('.cart-product__delete')
 
 class Products {
+
+    _products = [];
+
+    /**
+     * @param {Object[]} products
+     */
+    set products(products) {
+        this._products = products;
+    }
+
     constructor() {
         this.labelAdd = "Добавить в корзину";
         this.labelRemove = "Удалить из корзины";
     }
 
-    handleSetLocationStorage(element, id) {
-        const { pushProduct, products } = localStorageUtils.putProducts(id);
+    handleSetLocationStorage(event) {
+        const btn = event.target;
+        const productId = btn.dataset.id;
 
-        if (pushProduct) {
-            element.innerHTML = this.labelRemove;
-        } else {
-            element.innerHTML = this.labelAdd;
+        const product = this._products.find(item => item.id == productId);
+
+        if (! product) {
+            return;
         }
 
-        cartQuantity.render(products.length);
-        cartPage.render();
-        init();
+        cartPage.toggleProduct(product).then(() => {
+            cartPage.render();
+            cartQuantity.render();
+            this.render();
+        });
     }
 
     render() {
         const productsStore = localStorageUtils.getProducts();
+
         let htmlCatalog = '';
         const ROOT_PRODUCTS = document.querySelector('.product-grid')
-        CATALOG.forEach(({ id, name, price, imgLeft, imgCenter, imgRight, oldPrice, available, term }) => {
-            let activeText = " ";
-            if (productsStore.indexOf(id) === -1) {
-                activeText = this.labelAdd;
-            } else {
-                activeText = this.labelRemove;
-            }
+
+        this._products.forEach(({ id, name, price, imgLeft, imgCenter, imgRight, oldPrice, available, term }) => {
+            const activeText = cartPage.products.some(item => item.id === id) ? this.labelRemove : this.labelAdd;
 
             htmlCatalog += `
                 <li class="product-grid__item">
-                        <article class="product">
+                        <article class="product" data-id="${id}">
                             <div class="product__image">
                                 <div class="product__switch image-switch">
                                     <div class="image-switch__item">
@@ -71,22 +81,38 @@ class Products {
                                 <span class="product-price__current">${price} BYN</span>
                                 <span class="product-price__old">${oldPrice} BYN</span>
                             </div>
-                            <button class="product__btn btn " onclick="productsPage.handleSetLocationStorage(this, '${id}')">${activeText}</button>
+                            <button class="product__btn btn" data-id="${id}">${activeText}</button>
                         </article>
                     </li>
             `;
         });
 
-        const html = `
-        <ul class="product-grid" id="products">
-        ${htmlCatalog}
-        </ul>
-        `;
+        ROOT_PRODUCTS.innerHTML = htmlCatalog;
 
-        ROOT_PRODUCTS.innerHTML = html;
+        const addToProductBtn = document.querySelectorAll(".product__btn");
+
+        addToProductBtn.forEach((element) => {
+            element.addEventListener("click", this.handleSetLocationStorage.bind(this));
+        })
+    }
+
+    // emit loading
+    load() {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                this.products = CATALOG;
+                resolve();
+            }, 300);
+        });
     }
 }
 
 const productsPage = new Products();
-productsPage.render();
 
+productsPage.load()
+    .then(() => {
+        productsPage.render();
+    })
+    .catch(() => {
+        console.log("server error");
+    });

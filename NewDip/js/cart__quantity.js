@@ -1,8 +1,8 @@
 class CartQuantity {
-    render(count) {
+    render() {
         const htmlCatalogQuantity =
             `
-        <span class="cart__quantity">${count}</span>
+        <span class="cart__quantity">${cartPage.count}</span>
             `;
 
         const ROOT__QUANTITY = document.querySelector('.cart__text');
@@ -17,14 +17,12 @@ class CartQuantity {
         ROOT__QUANTITY.innerHTML = html;
 
         const cart = document.querySelector('.cart');
-        count > 0 ? cart.classList.add('active') : cart.classList.remove('active')
+        cartPage.count > 0 ? cart.classList.add('active') : cart.classList.remove('active')
     }
 }
 
 const cartQuantity = new CartQuantity();
-// Нам вернеться массив товаров
-const productsStore = localStorageUtils.getProducts();
 
-cartQuantity.render(productsStore.length);
+cartQuantity.render();
 
 

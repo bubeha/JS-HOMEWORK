@@ -1,7 +1,7 @@
 // Создаем каталог с товаром
 const CATALOG = [
     {
-        id: 'el1',
+        id: 1,
         name: 'Ноутбук Apple Macbook Pro 13" M1 2020 MYD92',
         imgLeft: 'img/catalog/macbook.jpg',
         imgCenter: 'img/catalog/macbook-2.jpg',
@@ -12,7 +12,7 @@ const CATALOG = [
         term: 879801,
     },
     {
-        id: 'el2',
+        id: 2,
         name: 'Смартфон Apple iPhone 12 Pro 256GB (тихоокеанский синий)',
         imgLeft: 'img/catalog/iphone.jpg',
         imgCenter: 'img/catalog/iphone-2.jpg',
@@ -23,7 +23,7 @@ const CATALOG = [
         term: 879802,
     },
     {
-        id: 'el3',
+        id: 3,
         name: 'Apple iPad 10.2" 2020 32GB LTE MYMH2 (серый космос)',
         imgLeft: 'img/catalog/ipad.jpg',
         imgCenter: 'img/catalog/ipad-2.jpg',
